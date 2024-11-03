@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love is in the Air - Página Principal</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Mitr:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* General */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Mitr', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background: linear-gradient(120deg, #ffeccf, #ffffff);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 80px;
+            overflow-x: hidden;
+            animation: fadeIn 0.7s ease-in;
+        }
+
+        /* Barra de navegación */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 243, 196, 0.9);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .navbar-logo {
+            color: #ff9a3c;
+            font-size: 2rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .navbar-logo:hover {
+            transform: scale(1.1);
+        }
+
+        .navbar-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar-link {
+            color: #333;
+            font-size: 1rem;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .navbar-link:hover {
+            background-color: #ff9a3c;
+            color: #fff;
+        }
+
+        /* Efecto de parallax para el fondo */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://example.com/your-background-image.jpg') no-repeat center center fixed;
+            background-size: cover;
+            z-index: -1;
+            opacity: 0.2;
+            transform: translateY(0);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        body:hover::before {
+            transform: translateY(-5px);
+        }
+
+        /* Sección principal */
+        section {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            width: 100%;
+            max-width: 900px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        section img {
+            border-radius: 8px;
+            max-width: 100%;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1, h2 {
+            color: #ff9a3c;
+        }
+
+        p {
+            color: #666;
+        }
+
+        /* Botón "Ver detalles de la serie" */
+        .button-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 25px;
+            background-color: #ff9a3c;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, transform 0.3s ease, box-shadow 0.3s;
+        }
+
+        .button-link:hover {
+            background-color: #d67d2e;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            color: #999;
+            font-size: 0.9rem;
+            margin-top: 30px;
+            padding: 20px;
+            width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 0 0 12px 12px;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+
+    </style>
+</head>
+<body>
+<!-- Barra de navegación -->
+<nav class="navbar">
+    <div class="navbar-container">
+        <a href="/" class="navbar-logo">Love is in the Air</a>
+        <ul class="navbar-links">
+            <li><a href="/" class="navbar-link">Inicio</a></li>
+            <li><a th:href="@{/series/1}" class="navbar-link">Detalles de la Serie</a></li>
+            <li><a th:href="@{/series/1/temporada/1}" class="navbar-link">Temporadas</a></li>
+            <li><a th:href="@{/series/1/personajes}" class="navbar-link">Personajes</a></li>
+        </ul>
+    </div>
+</nav>
+
+<header>
+    <h1 th:text="'Bienvenido a ' + ${serie.nombre}">Bienvenido a Love is in the Air</h1>
+</header>
+
+<section>
+    <img th:src="${serie.imagenPoster}" alt="Póster de la serie" style="width: 200px; height: auto;"/>
+    <p>Clasificación: <span th:text="${serie.clasificacion}">Clasificación</span></p>
+    <p>Promedio de Calificación: <span th:text="${promedioCalificacion}">0.0</span></p>
+</section>
+
+<section class="highlight-section">
+    <h2>Capítulo Mejor Calificado</h2>
+    <div th:if="${mejorCapitulo != null}">
+        <p><strong>Nombre:</strong> <span th:text="${mejorCapitulo.nombre}">Nombre del Capítulo</span></p>
+        <p><strong>Descripción:</strong> <span th:text="${mejorCapitulo.descripcion}">Descripción del Capítulo</span></p>
+        <p><strong>Calificación:</strong> <span th:text="${mejorCapitulo.calificacion}">Calificación</span></p>
+    </div>
+    <div th:if="${mejorCapitulo == null}">
+        <p>No hay capítulos disponibles.</p>
+    </div>
+</section>
+
+<footer>
+    <p>Desarrollado por [Tu Nombre]. Fecha de creación: [Fecha].</p>
+    <p>Este proyecto es un ejercicio sobre la serie "Love is in the Air".</p>
+</footer>
+</body>
+</html>
