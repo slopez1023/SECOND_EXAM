@@ -167,6 +167,65 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        /* Estilos para la animación de burbujas en el fondo */
+        .bubbles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .bubbles span {
+            position: absolute;
+            bottom: -100px;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 153, 51, 0.3);
+            border-radius: 50%;
+            animation: bubble 10s infinite ease-in;
+            opacity: 0;
+        }
+
+        .bubbles span:nth-child(2) { left: 20%; width: 30px; animation-duration: 12s; }
+        .bubbles span:nth-child(3) { left: 40%; width: 25px; animation-duration: 8s; }
+        .bubbles span:nth-child(4) { left: 60%; width: 35px; animation-duration: 10s; }
+        .bubbles span:nth-child(5) { left: 80%; width: 22px; animation-duration: 14s; }
+
+        @keyframes bubble {
+            0% { transform: translateY(0); opacity: 0; }
+            20% { opacity: 0.6; }
+            100% { transform: translateY(-600px); opacity: 0; }
+        }
+
+        /* Efecto de transición de color en títulos */
+        h1, h2 {
+            color: #ff9a3c;
+            transition: color 0.3s ease;
+        }
+
+        h1:hover, h2:hover {
+            color: #d67d2e;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #555;
+            font-size: 0.9rem;
+            border-top: 1px solid #ddd;
+            margin-top: 40px;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.05);
+        }
+        .footer p {
+            margin: 5px 0;
+        }
+        .footer em {
+            font-style: italic;
+            color: #ff9a3c;
+        }
 
 
     </style>
@@ -188,6 +247,14 @@
 <header>
     <h1 th:text="'Bienvenido a ' + ${serie.nombre}">Bienvenido a Love is in the Air</h1>
 </header>
+<!-- Animación de burbujas en el fondo -->
+<div class="bubbles">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
 
 <section>
     <img th:src="${serie.imagenPoster}" alt="Póster de la serie" style="width: 200px; height: auto;"/>
@@ -207,9 +274,10 @@
     </div>
 </section>
 
-<footer>
-    <p>Desarrollado por [Tu Nombre]. Fecha de creación: [Fecha].</p>
-    <p>Este proyecto es un ejercicio sobre la serie "Love is in the Air".</p>
+<footer class="footer">
+    <p>Desarrollado por Santiago Cardona López | Estudiante de Ingeniería de Software</p>
+    <p>Fecha de creación: 2 de noviembre de 2024</p>
+    <p>Proyecto académico sobre la serie <em>"Love is in the Air"</em>, explorando técnicas modernas de diseño web, animación y experiencia de usuario.</p>
 </footer>
 </body>
 </html>
